@@ -1,15 +1,19 @@
- var verbs = {
-estar: {
-presente: ["estoy", "estás", "está", "estamos", "estáis", "están"],
-futuro: ["estaré", "estarás", "estará", "estaremos", "estaráis", "estarán"],
-imperfecto: ["estaba","estabas", "estaba", "estábamos", "estabais", "estaban"]
+var verbs = {
+	estar: {
+		presente: ["estoy", "estás", "está", "estamos", "estáis", "están"],
+		futuro: ["estaré", "estarás", "estará", "estaremos", "estaráis", "estarán"],
+		imperfecto: ["estaba","estabas", "estaba", "estábamos", "estabais", "estaban"]
 },
-tener: {
-presente: ["tengo", "tienes", "tiene", "tenemos", "teneis", "tienen"],
-futuro: ["tendré", "tendrás", "tendrá", "tendremos", "tendréis", "tendrán"],
-imperfecto: ["tenía","tenías", "tenía", "teníamos", "teníais", "tenían"]
-}
+	tener: {
+		presente: ["tengo", "tienes", "tiene", "tenemos", "teneis", "tienen"],
+		futuro: ["tendré", "tendrás", "tendrá", "tendremos", "tendréis", "tendrán"],
+	imperfecto: ["tenía","tenías", "tenía", "teníamos", "teníais", "tenían"]
+	}
 };
+
+$.getJSON("src/verbosMAS.json", function(json) {
+    console.log(json); // this will show the info it in firebug console
+});
 
 //Object.keys(verbs["estar"])[Math.floor(Math.random()*Object.keys(verbs["estar"]).length
 //console.log(verbs["estar"]["present"][0])
