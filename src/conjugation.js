@@ -45,8 +45,8 @@ var correctVerbCombo;
 			console.log("middle::usedVerbTenseCombo: "+ usedVerbTenseCombo)
 			console.log(" ")
 						
-			copyCheck(randomVerb, keyValue);
-			}
+			return copyCheck(randomVerb, keyValue);
+		}
 		
 		else{
 			var correctCombo = [randomVerb, keyValue];
