@@ -19,6 +19,7 @@ var cellsInRow = 6;
 var verbChecker = [];
 var usedVerbTenseCombo;
 var randVerbArray;
+var correctVerbCombo;
 
 	function remove(array, element){
 		//console.log(array);
@@ -37,7 +38,7 @@ var randVerbArray;
 			keyArray = Object.keys(verbs[randomVerb]);
 		
 			// randomly chooses tense from keyArray
-			keyValue = keyArray[Math.ceil(Math.random()*keyArray.length)-1];
+			keyValue = keyArray[Math.floor(Math.random()*keyArray.length)];
 			
 			console.log(" ")
 			console.log("middle::randVerb-keyVal: "+ randomVerb + "-" + keyValue)
