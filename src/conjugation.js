@@ -9,6 +9,7 @@ var usedVerbTenseCombo;
 var randVerbArray;
 var correctVerbCombo;
 var idForButton;
+var keyValueAllowedList = ['presentIndicative'];
 
 
 	function remove(array, element){
@@ -18,7 +19,7 @@ var idForButton;
 	}
 	
 	function copyCheck(randomVerb, keyValue){
-		if($.inArray(randomVerb + "-" + keyValue, usedVerbTenseCombo) !== -1){
+		if($.inArray(randomVerb + "-" + keyValue, usedVerbTenseCombo) !== -1 || $.inArray(keyValue, keyValueAllowedList) == -1){
 			
 
 			// randomly chooses verb from randVerbArray
