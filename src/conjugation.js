@@ -136,10 +136,10 @@ document.getElementById("submitBox").addEventListener("click", function(){
 		for (var c = 0; c < cellsInRow; c++){
 			idAns = String(r) + "-" + String(c);
 			//answers.push(document.getElementById(idAns).value);
-		if(document.getElementById(idAns).value == verbs[verbChecker[r][0]][verbChecker[r][1]][c]){
+		if((document.getElementById(idAns).value).trim() == verbs[verbChecker[r][0]][verbChecker[r][1]][c]){
 				document.getElementById(idAns).style.color = "green"
 			}
-		else if(document.getElementById(idAns).value == ""){
+		else if((document.getElementById(idAns).value).trim() == ""){
 			
 		}
 		
