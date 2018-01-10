@@ -19,7 +19,10 @@ function drawCheckboxes(){
 		ulElement.appendChild(liElement)
 	
 	}
-	
+	var numInput = document.createElement('input');
+	numInput.setAttribute('type', 'number')
+	numInput.setAttribute('id', 'numInput')
+	ulElement.appendChild(numInput);
 	ulDiv.appendChild(ulElement);
 	filterClicker();
 }
@@ -43,6 +46,7 @@ function filterClicker(){
 			}
 		});
 		console.log(keyValueAllowedList)
+		totalRows = document.getElementById('numInput').value;
 		drawTable();
 	});
 
