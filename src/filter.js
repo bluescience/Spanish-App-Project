@@ -9,19 +9,29 @@ function drawCheckboxes(){
 	ulDiv.innerHTML += 'PLEASE SELECT THE TENSES YOU WISH TO PRACTICE';
 	var ulElement = document.createElement("ul");
 	ulElement.setAttribute('id', 'tensesFilter');
+	
 	for(x in filterArray){
 		var liElement = document.createElement("li");
 		var checkboxElement = document.createElement("input");
 		checkboxElement.setAttribute('type', 'checkBox');
 		checkboxElement.setAttribute('id', filterArray[x]);
+		if(filterArray[x] == 'presentIndicative'){
+			checkboxElement.setAttribute('checked', true)
+		}
 		liElement.appendChild(checkboxElement);
 		liElement.innerHTML += capitalizeFirstLetter(filterArray[x].replace(/([A-Z])/g, ' $1')).trim();
+		
 		ulElement.appendChild(liElement)
-	
 	}
+	
+	
+	
 	var numInput = document.createElement('input');
 	numInput.setAttribute('type', 'number')
 	numInput.setAttribute('id', 'numInput')
+	numInput.setAttribute('value', 5)
+	numInput.setAttribute('min', 1)
+	numInput.setAttribute('max', 100)
 	ulElement.appendChild(numInput);
 	ulDiv.appendChild(ulElement);
 	filterClicker();
@@ -45,7 +55,6 @@ function filterClicker(){
 				keyValueAllowedList.push($(this).attr('id'));
 			}
 		});
-		console.log(keyValueAllowedList)
 		totalRows = document.getElementById('numInput').value;
 		drawTable();
 	});
