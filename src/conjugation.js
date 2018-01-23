@@ -49,6 +49,7 @@ function copyCheck(randomVerb, keyValue){
 	
 
 function drawTable() {
+	console.log(learnModeIsChecked)
 	document.getElementById('ulDiv').innerHTML = '';
 	document.getElementById('submitDiv').innerHTML = '';
 	
@@ -212,11 +213,6 @@ function clearBox(elementID){
     document.getElementById(elementID).innerHTML = "";
 }
 
-function colorChange(){
-	var inputVal = document.getElementById('1-1-input')
-	inputVal.style.background = "red"
-}
-
 
 function dynamicChecker(){
 	var answers = []
@@ -225,7 +221,10 @@ function dynamicChecker(){
 			idAns = String(r) + "-" + String(c)+ "-input";
 			//answers.push(document.getElementById(idAns).value);
 			if((document.getElementById(idAns).value).trim() == verbs[verbChecker[r][0]][verbChecker[r][1]][c]){
-					document.getElementById(idAns).style.color = "green"
+				document.getElementById(idAns).style.color = "green"
+			}
+			else{
+				document.getElementById(idAns).style.color = "black"
 			}
 		}
 	}
@@ -233,27 +232,25 @@ function dynamicChecker(){
 
 
 function clicker (){
-		
 	document.getElementById("submitBox").addEventListener("click", function(){
 		var answers = []
 		for (var r = 0; r < totalRows; r++){
 			for (var c = 0; c < verbs[verbChecker[r][0]][verbChecker[r][1]].length; c++){
-				idAns = String(r) + "-" + String(c);
-				
-				//answers.push(document.getElementById(idAns).value);
-				if((document.getElementById(idAns).value).trim() == verbs[verbChecker[r][0]][verbChecker[r][1]][c]){
-						document.getElementById(idAns).style.color = "green"
-					}
-				else if((document.getElementById(idAns).value).trim() == ""){
-					
+				var inputedVerb = String(r) + "-" + String(c) + "-input";
+				if(learnModeIsChecked){
+					$("#" + inputedVerb).after('<br>' + verbs[verbChecker[r][0]][verbChecker[r][1]][c])
 				}
-				
+
+				//answers.push(document.getElementById(idAns).value);
+				if((document.getElementById(inputedVerb).value).trim() == verbs[verbChecker[r][0]][verbChecker[r][1]][c]){
+					document.getElementById(inputedVerb).style.color = "green"
+				}
 				else{
-						document.getElementById(idAns).style.color = "red"
+					document.getElementById(inputedVerb).style.color = "black"
 				}
 			}
 		}
-
+	learnModeIsChecked = false
 	});
 
 	 

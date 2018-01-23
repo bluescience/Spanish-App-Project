@@ -1,4 +1,4 @@
-
+var learnModeIsChecked
 
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -22,9 +22,17 @@ function drawCheckboxes(){
 		liElement.innerHTML += capitalizeFirstLetter(filterArray[x].replace(/([A-Z])/g, ' $1')).trim();
 		
 		ulElement.appendChild(liElement)
+		
 	}
 	
-	
+	var learnModeCheck = document.createElement('input')
+	learnModeCheck.setAttribute('type', 'checkBox');
+	learnModeCheck.setAttribute('id', 'learnMode')
+	var liLearnMode = document.createElement('li')
+	ulElement.appendChild(document.createElement('br'))
+	liLearnMode.appendChild(learnModeCheck)
+	liLearnMode.innerHTML += 'Learn Mode'
+	ulElement.appendChild(liLearnMode)
 	
 	var numInput = document.createElement('input');
 	numInput.setAttribute('type', 'number')
@@ -56,6 +64,10 @@ function filterClicker(){
 			}
 		});
 		totalRows = document.getElementById('numInput').value;
+		
+		if ($('#learnMode').is(':checked')) {
+			learnModeIsChecked = true;
+		}
 		drawTable();
 	});
 
