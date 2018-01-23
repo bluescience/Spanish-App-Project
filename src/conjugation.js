@@ -82,11 +82,11 @@ function drawTable() {
 	headerRow.appendChild(headerCell)
 	
 	headerCell = document.createElement('th')
-	headerCell.innerHTML = 'tu'
+	headerCell.innerHTML = 'tú'
 	headerRow.appendChild(headerCell)
 	
 	headerCell = document.createElement('th')
-	headerCell.innerHTML = 'ello / ella / usted'
+	headerCell.innerHTML = 'el / ella / usted'
 	headerRow.appendChild(headerCell)
 	
 	headerCell = document.createElement('th')
@@ -153,7 +153,9 @@ function drawTable() {
 	    // create cells in row
         for (var c = 0; c < cellsInRow; c++) {
             var cell = document.createElement("td");
-            var cellText = document.createElement("input")	
+            var cellText = document.createElement("input")
+			var cellDiv = document.createElement("div")
+			cellDiv.setAttribute("id", String(r) + '-' + String(c) + "-div")
 			cellText.setAttribute('onkeyup', 'dynamicChecker();')
 				
 			//sets id for inputs
@@ -172,6 +174,7 @@ function drawTable() {
 				cellText.setAttribute("onClick", "enableText(this.id)");	
 			}	
 			cell.appendChild(cellText);
+			cell.appendChild(cellDiv);
 			row.appendChild(cell);
         }           
             
@@ -238,7 +241,10 @@ function clicker (){
 			for (var c = 0; c < verbs[verbChecker[r][0]][verbChecker[r][1]].length; c++){
 				var inputedVerb = String(r) + "-" + String(c) + "-input";
 				if(learnModeIsChecked){
-					$("#" + inputedVerb).after('<br>' + verbs[verbChecker[r][0]][verbChecker[r][1]][c])
+					document.getElementById(String(r) + '-' + String(c) + "-div").innerHTML = verbs[verbChecker[r][0]][verbChecker[r][1]][c]
+				}
+				else if (learnModeWasCheckedBefore){
+					document.getElementById(String(r) + '-' + String(c) + "-div").innerHTML = '';
 				}
 
 				//answers.push(document.getElementById(idAns).value);
@@ -250,7 +256,17 @@ function clicker (){
 				}
 			}
 		}
-	learnModeIsChecked = false
+		
+		
+		if(learnModeIsChecked){
+			learnModeIsChecked = false
+			learnModeWasCheckedBefore = true
+		}
+		else if(learnModeWasCheckedBefore){
+			learnModeIsChecked = true
+			learnModeWasCheckedBefore = false
+		}
+		
 	});
 
 	 
