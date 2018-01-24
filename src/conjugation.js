@@ -50,6 +50,7 @@ function copyCheck(randomVerb, keyValue){
 
 function drawTable() {
 	console.log(learnModeIsChecked)
+	console.log(testModeIsChecked)
 	document.getElementById('ulDiv').innerHTML = '';
 	document.getElementById('submitDiv').innerHTML = '';
 	
@@ -218,16 +219,18 @@ function clearBox(elementID){
 
 
 function dynamicChecker(){
-	var answers = []
-	for (var r = 0; r < totalRows; r++){
-		for (var c = 0; c < verbs[verbChecker[r][0]][verbChecker[r][1]].length; c++){
-			idAns = String(r) + "-" + String(c)+ "-input";
-			//answers.push(document.getElementById(idAns).value);
-			if((document.getElementById(idAns).value).trim() == verbs[verbChecker[r][0]][verbChecker[r][1]][c]){
-				document.getElementById(idAns).style.color = "green"
-			}
-			else{
-				document.getElementById(idAns).style.color = "black"
+	if(!testModeIsChecked){
+		var answers = []
+		for (var r = 0; r < totalRows; r++){
+			for (var c = 0; c < verbs[verbChecker[r][0]][verbChecker[r][1]].length; c++){
+				idAns = String(r) + "-" + String(c)+ "-input";
+				//answers.push(document.getElementById(idAns).value);
+				if((document.getElementById(idAns).value).trim() == verbs[verbChecker[r][0]][verbChecker[r][1]][c]){
+					document.getElementById(idAns).style.color = "green"
+				}
+				else{
+					document.getElementById(idAns).style.color = "black"
+				}
 			}
 		}
 	}
@@ -237,36 +240,53 @@ function dynamicChecker(){
 function clicker (){
 	document.getElementById("submitBox").addEventListener("click", function(){
 		var answers = []
+		var questionAmount = 0
+		var correctAnswers = 0
 		for (var r = 0; r < totalRows; r++){
 			for (var c = 0; c < verbs[verbChecker[r][0]][verbChecker[r][1]].length; c++){
 				var inputedVerb = String(r) + "-" + String(c) + "-input";
-				if(learnModeIsChecked){
-					document.getElementById(String(r) + '-' + String(c) + "-div").innerHTML = verbs[verbChecker[r][0]][verbChecker[r][1]][c]
-				}
-				else if (learnModeWasCheckedBefore){
-					document.getElementById(String(r) + '-' + String(c) + "-div").innerHTML = '';
-				}
+				if(initialLearnMode){
+					if(learnModeIsChecked){
+						document.getElementById(String(r) + '-' + String(c) + "-div").innerHTML = verbs[verbChecker[r][0]][verbChecker[r][1]][c]
+					}
+					else if (learnModeWasCheckedBefore){
+						document.getElementById(String(r) + '-' + String(c) + "-div").innerHTML = '';
+					}
 
-				//answers.push(document.getElementById(idAns).value);
-				if((document.getElementById(inputedVerb).value).trim() == verbs[verbChecker[r][0]][verbChecker[r][1]][c]){
-					document.getElementById(inputedVerb).style.color = "green"
+					//answers.push(document.getElementById(idAns).value);
+					if((document.getElementById(inputedVerb).value).trim() == verbs[verbChecker[r][0]][verbChecker[r][1]][c]){
+						document.getElementById(inputedVerb).style.color = "green"
+					}
+					else{
+						document.getElementById(inputedVerb).style.color = "black"
+					}
 				}
-				else{
-					document.getElementById(inputedVerb).style.color = "black"
+				if(initialTestMode){
+					questionAmount++;
+					if((document.getElementById(inputedVerb).value).trim() == verbs[verbChecker[r][0]][verbChecker[r][1]][c]){
+						document.getElementById(inputedVerb).style.color = "green"
+						correctAnswers++;
+					}
+					else{
+						document.getElementById(inputedVerb).style.color = "red"
+					}
 				}
 			}
 		}
 		
-		
-		if(learnModeIsChecked){
-			learnModeIsChecked = false
-			learnModeWasCheckedBefore = true
+		if(initialLearnMode){
+			if(learnModeIsChecked){
+				learnModeIsChecked = false
+				learnModeWasCheckedBefore = true
+			}
+			else if(learnModeWasCheckedBefore){
+				learnModeIsChecked = true
+				learnModeWasCheckedBefore = false
+			}
 		}
-		else if(learnModeWasCheckedBefore){
-			learnModeIsChecked = true
-			learnModeWasCheckedBefore = false
+		if(initialTestMode){
+			document.getElementById('scoreDiv').innerHTML += ("You have scored " + correctAnswers + '/' + questionAmount + ": scoring " + (correctAnswers / questionAmount) * 100 + "% <br>")
 		}
-		
 	});
 
 	 

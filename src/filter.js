@@ -1,4 +1,5 @@
-var learnModeIsChecked
+var learnModeIsChecked = false
+var testModeIsChecked = false
 
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -28,11 +29,21 @@ function drawCheckboxes(){
 	var learnModeCheck = document.createElement('input')
 	learnModeCheck.setAttribute('type', 'checkBox');
 	learnModeCheck.setAttribute('id', 'learnMode')
+	
 	var liLearnMode = document.createElement('li')
 	ulElement.appendChild(document.createElement('br'))
 	liLearnMode.appendChild(learnModeCheck)
 	liLearnMode.innerHTML += 'Learn Mode'
 	ulElement.appendChild(liLearnMode)
+	
+	var testModeCheck = document.createElement('input')
+	testModeCheck.setAttribute('type', 'checkBox');
+	testModeCheck.setAttribute('id', 'testMode')
+	
+	var liTestMode = document.createElement('li')
+	liTestMode.appendChild(testModeCheck)
+	liTestMode.innerHTML += 'Test Mode'
+	ulElement.appendChild(liTestMode)
 	
 	var numInput = document.createElement('input');
 	numInput.setAttribute('type', 'number')
@@ -68,6 +79,16 @@ function filterClicker(){
 		if ($('#learnMode').is(':checked')) {
 			learnModeIsChecked = true;
 		}
+		else if ($('#testMode').is(':checked')) {
+			testModeIsChecked = true;
+		}
+		else if ($('#testMode').is(':checked') && $('#learnMode').is(':checked')){
+			testModeIsChecked = true;
+		}
+		
+		initialLearnMode = learnModeIsChecked
+		initialTestMode = testModeIsChecked
+		
 		drawTable();
 	});
 
