@@ -12,6 +12,8 @@ var correctVerbCombo;
 var idForButton;
 var keyValueAllowedList = [];
 
+var uselessVar
+
 
 
 
