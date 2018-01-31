@@ -74,6 +74,9 @@ function drawTable() {
 	headerCell.innerHTML = 'verb'
 	headerRow.appendChild(headerCell)
 	
+	headerCell = document.createElement('th')
+	headerCell.innerHTML = 'tense'
+	headerRow.appendChild(headerCell)
 	
 	headerCell = document.createElement('th')
 	headerCell.innerHTML = 'translation'
@@ -142,9 +145,14 @@ function drawTable() {
 		verbChecker[r].push([keyVal])
 		
 		//finishes creation
-		verbText.innerHTML += randVerb + "-" + keyVal;
+		verbText.innerHTML += randVerb;
 		verbCell.appendChild(verbText);
 		row.appendChild(verbCell);
+		
+		var tenseCell = document.createElement('td');
+		tenseCell.setAttribute("id", keyVal)
+		tenseCell.innerHTML += keyVal
+		row.appendChild(tenseCell);
 		
 		//writes translation in new box
 		var translationCell = document.createElement('td');
