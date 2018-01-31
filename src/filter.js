@@ -16,7 +16,7 @@ function drawCheckboxes(){
 		var checkboxElement = document.createElement("input");
 		checkboxElement.setAttribute('type', 'checkBox');
 		checkboxElement.setAttribute('id', filterArray[x]);
-		if(filterArray[x] == 'presentIndicative'){
+		if(filterArray[x] == 'Present Indicative'){
 			checkboxElement.setAttribute('checked', true)
 		}
 		liElement.appendChild(checkboxElement);
