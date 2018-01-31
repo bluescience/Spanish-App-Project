@@ -199,7 +199,12 @@ function drawTable() {
 	var submitDiv = document.getElementById('submitDiv');
 	var submitBoxForVerbs = document.createElement('input');
 	submitBoxForVerbs.setAttribute('type', 'submit');
-	submitBoxForVerbs.setAttribute('value', 'Submit');
+	if(learnModeIsChecked){
+		submitBoxForVerbs.setAttribute('value', 'Hint');
+	}
+	else{
+		submitBoxForVerbs.setAttribute('value', 'Submit');
+	}
 	submitBoxForVerbs.setAttribute('id', 'submitBox');
 	submitDiv.appendChild(submitBoxForVerbs);
 	
