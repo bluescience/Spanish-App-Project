@@ -185,7 +185,7 @@ function drawTable() {
 			}
 			if(!spanishModeIsChecked){
 				if(c == 4){
-					cellText.setAttribute("id", "empty" + r)
+					cellText.setAttribute("id", "empty2" + r)
 					cellText.setAttribute("disabled", true)
 				}
 			}
