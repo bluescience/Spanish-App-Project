@@ -182,7 +182,18 @@ function drawTable() {
 			else{
 				cellText.setAttribute("id", String(r) + "-" + String(c) + "-input");
 				cellText.setAttribute("onClick", "enableText(this.id)");	
-			}	
+			}
+			if(!spanishModeIsChecked){
+				if(c == 4){
+					cellText.setAttribute("id", "empty" + r)
+					cellText.setAttribute("disabled", true)
+				}
+			}
+			else{
+				cellText.setAttribute("id", String(r) + "-" + String(c) + "-input");
+				cellText.setAttribute("onClick", "enableText(this.id)");	
+			}
+			
 			cell.appendChild(cellText);
 			cell.appendChild(cellDiv);
 			row.appendChild(cell);
@@ -237,6 +248,9 @@ function dynamicChecker(){
 		var answers = []
 		for (var r = 0; r < totalRows; r++){
 			for (var c = 0; c < verbs[verbChecker[r][0]][verbChecker[r][1]].length; c++){
+				if(!spanishModeIsChecked && c == 4){
+					c++;
+				}
 				idAns = String(r) + "-" + String(c)+ "-input";
 				//answers.push(document.getElementById(idAns).value);
 				if((document.getElementById(idAns).value).trim() == verbs[verbChecker[r][0]][verbChecker[r][1]][c]){
@@ -258,6 +272,9 @@ function clicker (){
 		var correctAnswers = 0
 		for (var r = 0; r < totalRows; r++){
 			for (var c = 0; c < verbs[verbChecker[r][0]][verbChecker[r][1]].length; c++){
+				if(!spanishModeIsChecked && c == 4){
+					c++;
+				}
 				var inputedVerb = String(r) + "-" + String(c) + "-input";
 				if(initialLearnMode){
 					if(learnModeIsChecked){

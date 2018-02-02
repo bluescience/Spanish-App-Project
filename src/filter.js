@@ -1,5 +1,6 @@
 var learnModeIsChecked = false
 var testModeIsChecked = false
+var spanishModeIsChecked = false
 
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -45,12 +46,24 @@ function drawCheckboxes(){
 	liTestMode.innerHTML += 'Test Mode'
 	ulElement.appendChild(liTestMode)
 	
+	var spanishModeCheck = document.createElement('input')
+	spanishModeCheck.setAttribute('type', 'checkBox');
+	spanishModeCheck.setAttribute('id', 'spanishMode')
+	spanishModeCheck.setAttribute('checked', true)
+	
+	var liSpanishMode = document.createElement('li')
+	ulElement.appendChild(document.createElement('br'))
+	liSpanishMode.appendChild(spanishModeCheck)
+	liSpanishMode.innerHTML += 'Spanish Mode'
+	ulElement.appendChild(liSpanishMode)
+	
 	var numInput = document.createElement('input');
 	numInput.setAttribute('type', 'number')
 	numInput.setAttribute('id', 'numInput')
 	numInput.setAttribute('value', 5)
 	numInput.setAttribute('min', 1)
 	numInput.setAttribute('max', 100)
+	
 	ulElement.appendChild(numInput);
 	ulDiv.appendChild(ulElement);
 	filterClicker();
@@ -76,6 +89,9 @@ function filterClicker(){
 		});
 		totalRows = document.getElementById('numInput').value;
 		
+		if ($('#spanishMode').is(':checked')){
+			spanishModeIsChecked = true;
+		}
 		if ($('#learnMode').is(':checked')) {
 			learnModeIsChecked = true;
 		}
