@@ -1,6 +1,7 @@
 var learnModeIsChecked = false
 var testModeIsChecked = false
 var spanishModeIsChecked = false
+var translationModeIsChecked = false
 
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -45,6 +46,15 @@ function drawCheckboxes(){
 	liTestMode.appendChild(testModeCheck)
 	liTestMode.innerHTML += 'Test Mode'
 	ulElement.appendChild(liTestMode)
+
+	var translationModeCheck = document.createElement('input')
+	translationModeCheck.setAttribute('type', 'checkBox');
+	translationModeCheck.setAttribute('id', 'translationMode')
+	
+	var liTranslationMode = document.createElement('li')
+	liTranslationMode.appendChild(translationModeCheck)
+	liTranslationMode.innerHTML += 'Test your Translation Mode'
+	ulElement.appendChild(liTranslationMode)
 	
 	var spanishModeCheck = document.createElement('input')
 	spanishModeCheck.setAttribute('type', 'checkBox');
@@ -91,6 +101,9 @@ function filterClicker(){
 		
 		if ($('#spanishMode').is(':checked')){
 			spanishModeIsChecked = true;
+		}
+		if ($('#translationMode').is(':checked')){
+			translationModeIsChecked = true;
 		}
 		if ($('#learnMode').is(':checked')) {
 			learnModeIsChecked = true;

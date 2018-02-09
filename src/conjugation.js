@@ -157,7 +157,19 @@ function drawTable() {
 		//writes translation in new box
 		var translationCell = document.createElement('td');
 		translationCell.setAttribute("id", randVerb + "-" + "english")
-		translationCell.innerHTML += verbs[randVerb]["english"]
+		if(!translationModeIsChecked){
+			translationCell.innerHTML += verbs[randVerb]["english"]
+		}
+		else{
+			var cellTranslationText = document.createElement("input");
+			cellTranslationText.setAttribute("id", r + "-translation")
+			cellTranslationText.setAttribute('onkeyup', 'dynamicChecker();')
+			translationCell.appendChild(cellTranslationText)
+			
+			var translationDiv = document.createElement("div");
+			translationDiv.setAttribute("id", r + "-translation-div")
+			translationCell.appendChild(translationDiv)
+		}
 		row.appendChild(translationCell);
 		
 	    // create cells in row
@@ -247,6 +259,17 @@ function dynamicChecker(){
 	if(!testModeIsChecked){
 		var answers = []
 		for (var r = 0; r < totalRows; r++){
+			if(translationModeIsChecked){
+				idAns = r + "-translation"
+				
+				if((document.getElementById(idAns).value).trim() == verbs[verbChecker[r][0]]['english']){
+					document.getElementById(idAns).style.color = "green"
+				}
+				else{
+					document.getElementById(idAns).style.color = "black"
+				}
+			}
+			
 			for (var c = 0; c < verbs[verbChecker[r][0]][verbChecker[r][1]].length; c++){
 				if(!spanishModeIsChecked && c == 4){
 					c++;
@@ -261,6 +284,7 @@ function dynamicChecker(){
 				}
 			}
 		}
+		
 	}
 }
 
@@ -271,6 +295,25 @@ function clicker (){
 		var questionAmount = 0
 		var correctAnswers = 0
 		for (var r = 0; r < totalRows; r++){
+			if(translationModeIsChecked){
+				idAns = r + "-translation"
+				questionAmount++
+				if((document.getElementById(idAns).value).trim() == verbs[verbChecker[r][0]]['english']){
+					document.getElementById(idAns).style.color = "green"
+					correctAnswers++
+				}
+				else{
+					document.getElementById(idAns).style.color = "black"
+				}
+				if(initialLearnMode){
+					if(learnModeIsChecked){
+						document.getElementById(r + '-translation-div').innerHTML = verbs[verbChecker[r][0]]['english']
+					}
+					else if (learnModeWasCheckedBefore){
+						document.getElementById(r + '-translation-div').innerHTML = '';
+					}
+				}
+			}	
 			for (var c = 0; c < verbs[verbChecker[r][0]][verbChecker[r][1]].length; c++){
 				if(!spanishModeIsChecked && c == 4){
 					c++;
