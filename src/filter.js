@@ -3,6 +3,8 @@ var testModeIsChecked = false
 var spanishModeIsChecked = false
 var translationModeIsChecked = false
 
+var loginInfo = {'login-1': ['username', 'password']}
+
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
@@ -10,8 +12,32 @@ function capitalizeFirstLetter(string) {
 function drawCheckboxes(){
 	var ulDiv = document.getElementById('ulDiv');
 	ulDiv.innerHTML += 'PLEASE SELECT THE TENSES YOU WISH TO PRACTICE';
+	
 	var ulElement = document.createElement("ul");
 	ulElement.setAttribute('id', 'tensesFilter');
+	
+	var userName = document.createElement('input')
+	userName.setAttribute('id', 'username')
+	ulElement.appendChild(userName)
+	
+	ulElement.appendChild(document.createElement('br'))
+	
+	var passWord = document.createElement('input')
+	passWord.setAttribute('id', 'password')
+	ulElement.appendChild(passWord)
+	
+	ulElement.appendChild(document.createElement('br'))
+	
+	
+	var loginSubmit = document.createElement('input')
+	loginSubmit.setAttribute('type', 'submit');
+	loginSubmit.setAttribute('value', 'Submit');
+	loginSubmit.setAttribute('id', 'loginSubmit');
+	ulElement.appendChild(loginSubmit)
+	
+	ulElement.appendChild(document.createElement('br'))
+	ulElement.appendChild(document.createElement('br'))
+	
 	
 	for(x in filterArray){
 		var liElement = document.createElement("li");
@@ -27,6 +53,7 @@ function drawCheckboxes(){
 		ulElement.appendChild(liElement)
 		
 	}
+	
 	
 	var learnModeCheck = document.createElement('input')
 	learnModeCheck.setAttribute('type', 'checkBox');
@@ -90,7 +117,14 @@ function filterClicker(){
 	submitDiv.appendChild(submitBoxFilterForFilter);
 	
 	checkboxes = $('ul li input[type=checkbox]');
-
+	
+	document.getElementById("loginSubmit").addEventListener("click", function(){
+		if(document.getElementById('username').value == loginInfo['login-1'][0] && document.getElementById('password').value == loginInfo['login-1'][1]){
+			alert('TEST')
+		}
+	})
+	
+	
 	document.getElementById("submitBoxFilter").addEventListener("click", function(){
 		checkboxes.each(function(e){
 			if(this.checked == true){
