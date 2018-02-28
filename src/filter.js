@@ -3,7 +3,7 @@ var testModeIsChecked = false
 var spanishModeIsChecked = false
 var translationModeIsChecked = false
 
-var loginInfo = {'login-1': ['username', 'password']}
+var loginInfo = [['username', 'password'],['username2', 'password2']]
 
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -19,13 +19,12 @@ function drawCheckboxes(){
 	var userName = document.createElement('input')
 	userName.setAttribute('id', 'username')
 	ulElement.appendChild(userName)
-	
 	ulElement.appendChild(document.createElement('br'))
 	
 	var passWord = document.createElement('input')
 	passWord.setAttribute('id', 'password')
+	passWord.setAttribute('type', 'password')
 	ulElement.appendChild(passWord)
-	
 	ulElement.appendChild(document.createElement('br'))
 	
 	
@@ -119,8 +118,10 @@ function filterClicker(){
 	checkboxes = $('ul li input[type=checkbox]');
 	
 	document.getElementById("loginSubmit").addEventListener("click", function(){
-		if(document.getElementById('username').value == loginInfo['login-1'][0] && document.getElementById('password').value == loginInfo['login-1'][1]){
-			alert('TEST')
+		for(i = 0; i < loginInfo.length; i++){
+			if(loginInfo[i].includes(document.getElementById('username').value) && loginInfo[i].includes(document.getElementById('password').value)){
+				alert('TEST')
+			}
 		}
 	})
 	
