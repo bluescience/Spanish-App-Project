@@ -12,9 +12,19 @@ var correctVerbCombo;
 var idForButton;
 var keyValueAllowedList = [];
 
+function conjugationInit(){
+	filterArray = ['Conditional Continuous', 'Conditional Indicative', 'Conditional Perfect', 'Future Continuous', 'Future Indicative', 'Future Perfect', 'Future Perfect Subjunctive', 'Future Subjunctive', 'Imperative', 'Imperfect Continuous', 'Imperfect Indicative', 'Imperfect Subjunctive', 'Imperfect Subjunctive 2', 'Negative Imperative', 'Past Perfect', 'Past Perfect Subjunctive', 'Present Continuous', 'Present Indicative', 'Present Perfect', 'Present Perfect Subjunctive', 'Present Subjunctive', 'Preterit Continuous', 'Preterit Indicative', 'Preterit Perfect']
+	totalRows;
+	cellsInRow = 6;
+	verbChecker = [];
+	usedVerbTenseCombo;
+	randVerbArray;
+	correctVerbCombo;
+	idForButton;
+	keyValueAllowedList = [];
 
-
-
+	
+}
 
 function remove(array, element){
 	//console.log(array);
@@ -50,10 +60,19 @@ function copyCheck(randomVerb, keyValue){
 	
 
 function drawTable() {
+	
 	console.log(learnModeIsChecked)
 	console.log(testModeIsChecked)
 	document.getElementById('ulDiv').innerHTML = '';
 	document.getElementById('submitDiv').innerHTML = '';
+	
+	var ulDiv = document.getElementById("ulDiv")
+	
+	var resetButton = document.createElement('input')
+	resetButton.setAttribute('type', 'submit')
+	resetButton.setAttribute('value', 'resetButton')
+	resetButton.setAttribute('id', 'resetButton')
+	ulDiv.appendChild(resetButton)
 	
 	// [] => ['estar', 'tener', ...]
 	
@@ -290,6 +309,17 @@ function dynamicChecker(){
 
 
 function clicker (){
+	
+	document.getElementById('resetButton').addEventListener("click", function(){
+		ulDiv.innerHTML = ''
+		tableDiv.innerHTML = ''
+		accentDiv.innerHTML = ''
+		submitDiv.innerHTML = ''
+		scoreDiv.innerHTML = ''
+		
+		drawCheckboxes();
+	});
+	
 	document.getElementById("submitBox").addEventListener("click", function(){
 		var answers = []
 		var questionAmount = 0

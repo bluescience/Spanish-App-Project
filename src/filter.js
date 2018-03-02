@@ -2,6 +2,16 @@ var learnModeIsChecked = false
 var testModeIsChecked = false
 var spanishModeIsChecked = false
 var translationModeIsChecked = false
+var filterArray = ['Conditional Continuous', 'Conditional Indicative', 'Conditional Perfect', 'Future Continuous', 'Future Indicative', 'Future Perfect', 'Future Perfect Subjunctive', 'Future Subjunctive', 'Imperative', 'Imperfect Continuous', 'Imperfect Indicative', 'Imperfect Subjunctive', 'Imperfect Subjunctive 2', 'Negative Imperative', 'Past Perfect', 'Past Perfect Subjunctive', 'Present Continuous', 'Present Indicative', 'Present Perfect', 'Present Perfect Subjunctive', 'Present Subjunctive', 'Preterit Continuous', 'Preterit Indicative', 'Preterit Perfect']
+
+function filterInit(){
+	learnModeIsChecked = false
+	testModeIsChecked = false
+	spanishModeIsChecked = false
+	translationModeIsChecked = false
+	filterArray = ['Conditional Continuous', 'Conditional Indicative', 'Conditional Perfect', 'Future Continuous', 'Future Indicative', 'Future Perfect', 'Future Perfect Subjunctive', 'Future Subjunctive', 'Imperative', 'Imperfect Continuous', 'Imperfect Indicative', 'Imperfect Subjunctive', 'Imperfect Subjunctive 2', 'Negative Imperative', 'Past Perfect', 'Past Perfect Subjunctive', 'Present Continuous', 'Present Indicative', 'Present Perfect', 'Present Perfect Subjunctive', 'Present Subjunctive', 'Preterit Continuous', 'Preterit Indicative', 'Preterit Perfect']
+
+}
 
 var loginInfo = [['username', 'password'],['username2', 'password2']]
 
@@ -9,7 +19,10 @@ function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
+
+
 function drawCheckboxes(){
+	filterInit();
 	var ulDiv = document.getElementById('ulDiv');
 	ulDiv.innerHTML += 'PLEASE SELECT THE TENSES YOU WISH TO PRACTICE';
 	
@@ -153,6 +166,7 @@ function filterClicker(){
 		initialLearnMode = learnModeIsChecked
 		initialTestMode = testModeIsChecked
 		
+		//conjugationInit();
 		drawTable();
 	});
 
