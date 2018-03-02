@@ -70,10 +70,15 @@ function drawTable() {
 	
 	var resetButton = document.createElement('input')
 	resetButton.setAttribute('type', 'submit')
-	resetButton.setAttribute('value', 'resetButton')
+	resetButton.setAttribute('value', 'Home')
 	resetButton.setAttribute('id', 'resetButton')
 	ulDiv.appendChild(resetButton)
-	
+
+	var redrawButton = document.createElement('input')
+	redrawButton.setAttribute('type', 'submit')
+	redrawButton.setAttribute('value', 'Redraw Table with new verbs')
+	redrawButton.setAttribute('id', 'redrawButton')
+	ulDiv.appendChild(redrawButton)
 	// [] => ['estar', 'tener', ...]
 	
 	
@@ -318,6 +323,16 @@ function clicker (){
 		scoreDiv.innerHTML = ''
 		
 		drawCheckboxes();
+	});
+	
+	document.getElementById('redrawButton').addEventListener("click", function(){
+		ulDiv.innerHTML = ''
+		tableDiv.innerHTML = ''
+		accentDiv.innerHTML = ''
+		submitDiv.innerHTML = ''
+		scoreDiv.innerHTML = ''
+		
+		drawTable();
 	});
 	
 	document.getElementById("submitBox").addEventListener("click", function(){
