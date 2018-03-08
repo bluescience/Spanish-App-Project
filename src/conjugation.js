@@ -11,6 +11,7 @@ var randVerbArray;
 var correctVerbCombo;
 var idForButton;
 var keyValueAllowedList = [];
+var learnModeWasCheckedBefore;
 
 function conjugationInit(){
 	filterArray = ['Conditional Continuous', 'Conditional Indicative', 'Conditional Perfect', 'Future Continuous', 'Future Indicative', 'Future Perfect', 'Future Perfect Subjunctive', 'Future Subjunctive', 'Imperative', 'Imperfect Continuous', 'Imperfect Indicative', 'Imperfect Subjunctive', 'Imperfect Subjunctive 2', 'Negative Imperative', 'Past Perfect', 'Past Perfect Subjunctive', 'Present Continuous', 'Present Indicative', 'Present Perfect', 'Present Perfect Subjunctive', 'Present Subjunctive', 'Preterit Continuous', 'Preterit Indicative', 'Preterit Perfect']
@@ -61,8 +62,10 @@ function copyCheck(randomVerb, keyValue){
 
 function drawTable() {
 	
+	console.log(initialLearnMode)
 	console.log(learnModeIsChecked)
-	console.log(testModeIsChecked)
+	console.log(learnModeWasCheckedBefore)
+	
 	document.getElementById('ulDiv').innerHTML = '';
 	document.getElementById('submitDiv').innerHTML = '';
 	
@@ -300,6 +303,7 @@ function dynamicChecker(){
 				}
 				idAns = String(r) + "-" + String(c)+ "-input";
 				//answers.push(document.getElementById(idAns).value);
+				console.log(verbs[verbChecker[r][0]][verbChecker[r][1]])
 				if((document.getElementById(idAns).value).trim() == verbs[verbChecker[r][0]][verbChecker[r][1]][c]){
 					document.getElementById(idAns).style.color = "green"
 				}
@@ -322,6 +326,7 @@ function clicker (){
 		submitDiv.innerHTML = ''
 		scoreDiv.innerHTML = ''
 		
+		conjugationInit();
 		drawCheckboxes();
 	});
 	
@@ -331,7 +336,12 @@ function clicker (){
 		accentDiv.innerHTML = ''
 		submitDiv.innerHTML = ''
 		scoreDiv.innerHTML = ''
+		if(initialLearnMode){
+			learnModeIsChecked = true
+			learnModeWasCheckedBefore = false
+		}
 		
+		verbChecker = [];
 		drawTable();
 	});
 	
