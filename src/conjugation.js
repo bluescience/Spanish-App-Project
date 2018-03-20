@@ -13,6 +13,7 @@ var idForButton;
 var keyValueAllowedList = [];
 var learnModeWasCheckedBefore;
 
+
 function conjugationInit(){
 	filterArray = ['Conditional Continuous', 'Conditional Indicative', 'Conditional Perfect', 'Future Continuous', 'Future Indicative', 'Future Perfect', 'Future Perfect Subjunctive', 'Future Subjunctive', 'Imperative', 'Imperfect Continuous', 'Imperfect Indicative', 'Imperfect Subjunctive', 'Imperfect Subjunctive 2', 'Negative Imperative', 'Past Perfect', 'Past Perfect Subjunctive', 'Present Continuous', 'Present Indicative', 'Present Perfect', 'Present Perfect Subjunctive', 'Present Subjunctive', 'Preterit Continuous', 'Preterit Indicative', 'Preterit Perfect']
 	totalRows;
@@ -22,10 +23,54 @@ function conjugationInit(){
 	randVerbArray;
 	correctVerbCombo;
 	idForButton;
-	keyValueAllowedList = [];
-
-	
+	keyValueAllowedList = [];	
 }
+
+function filterVerbs(arrayToFilter){
+	for(var i = 0; i < arrayToFilter.length; i++){
+		var isInArray = false
+		for(var j = 0; j < Object.keys(verbs).length; j++){
+			if(arrayToFilter[i] == Object.keys(verbs)[j]){
+				isInArray = true
+			}
+		}
+		if(!isInArray){
+			arrayToFilter[i] = null
+		}
+	}
+	
+	while(arrayToFilter[0] == null){
+		arrayToFilter = arrayToFilter.slice(1,arrayToFilter.length)
+	}
+	while(arrayToFilter[arrayToFilter.length-1] == null){
+		arrayToFilter = arrayToFilter.slice(0,arrayToFilter.length-1)
+	}
+	
+	
+	for(var i = 0; i < arrayToFilter.length; i++){
+		while(arrayToFilter[i] == null){
+			array1 = arrayToFilter.slice(0, i)
+			array2 = arrayToFilter.slice(i+1, arrayToFilter.length)
+			array3 = []
+			
+			for(var j = 0; j < array1.length; j++){
+				array3.push(array1[j])
+			}
+			
+			for(var k = 0; k < array2.length; k++){
+				array3.push(array2[k])
+			}
+			
+			arrayToFilter = array3
+			
+		}
+	}
+	
+	return arrayToFilter
+}
+
+
+
 
 function remove(array, element){
 	//console.log(array);
@@ -138,8 +183,10 @@ function drawTable() {
     
 	// creating rows
     for (var r = 0; r < totalRows; r++) {
+		
 		// randomly chooses verb from randVerbArray
 		var randVerb = randVerbArray[Math.ceil(Math.random()*randVerbArray.length)-1];
+
 		
 		// pulls all tenses available to randVerb
 		var keyArray = Object.keys(verbs[randVerb]);
@@ -151,11 +198,14 @@ function drawTable() {
 		
 		randVerb = correctVerbCombo[0]
 		keyVal = correctVerbCombo[1]
+		if(r < forcedVerbArray.length){
+			randVerb = forcedVerbArray[r]
+		}
 		
 		//pushes id of checker label to usedVerbTenseCombo
 		usedVerbTenseCombo.push(randVerb + "-" + keyVal);
 		
-		// removes used tenses (WIP)
+		// removes used tenses 
 		keyArray = remove(keyArray, keyVal)
 		
 		// creates checker column

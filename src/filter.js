@@ -3,6 +3,7 @@ var testModeIsChecked = false
 var spanishModeIsChecked = false
 var translationModeIsChecked = false
 var filterArray = ['Conditional Continuous', 'Conditional Indicative', 'Conditional Perfect', 'Future Continuous', 'Future Indicative', 'Future Perfect', 'Future Perfect Subjunctive', 'Future Subjunctive', 'Imperative', 'Imperfect Continuous', 'Imperfect Indicative', 'Imperfect Subjunctive', 'Imperfect Subjunctive 2', 'Negative Imperative', 'Past Perfect', 'Past Perfect Subjunctive', 'Present Continuous', 'Present Indicative', 'Present Perfect', 'Present Perfect Subjunctive', 'Present Subjunctive', 'Preterit Continuous', 'Preterit Indicative', 'Preterit Perfect']
+var forcedVerbArray = []
 
 function filterInit(){
 	learnModeIsChecked = false
@@ -10,7 +11,7 @@ function filterInit(){
 	spanishModeIsChecked = false
 	translationModeIsChecked = false
 	filterArray = ['Conditional Continuous', 'Conditional Indicative', 'Conditional Perfect', 'Future Continuous', 'Future Indicative', 'Future Perfect', 'Future Perfect Subjunctive', 'Future Subjunctive', 'Imperative', 'Imperfect Continuous', 'Imperfect Indicative', 'Imperfect Subjunctive', 'Imperfect Subjunctive 2', 'Negative Imperative', 'Past Perfect', 'Past Perfect Subjunctive', 'Present Continuous', 'Present Indicative', 'Present Perfect', 'Present Perfect Subjunctive', 'Present Subjunctive', 'Preterit Continuous', 'Preterit Indicative', 'Preterit Perfect']
-
+	forcedVerbArray = []
 }
 
 var loginInfo = [['username', 'password'],['username2', 'password2']]
@@ -18,6 +19,7 @@ var loginInfo = [['username', 'password'],['username2', 'password2']]
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
+
 
 
 
@@ -29,25 +31,13 @@ function drawCheckboxes(){
 	var ulElement = document.createElement("ul");
 	ulElement.setAttribute('id', 'tensesFilter');
 	
-	var userName = document.createElement('input')
-	userName.setAttribute('id', 'username')
-	ulElement.appendChild(userName)
 	ulElement.appendChild(document.createElement('br'))
-	
-	var passWord = document.createElement('input')
-	passWord.setAttribute('id', 'password')
-	passWord.setAttribute('type', 'password')
-	ulElement.appendChild(passWord)
 	ulElement.appendChild(document.createElement('br'))
 	
 	
-	var loginSubmit = document.createElement('input')
-	loginSubmit.setAttribute('type', 'submit');
-	loginSubmit.setAttribute('value', 'Submit');
-	loginSubmit.setAttribute('id', 'loginSubmit');
-	ulElement.appendChild(loginSubmit)
-	
-	ulElement.appendChild(document.createElement('br'))
+	var forcedVerbInput = document.createElement('input')
+	forcedVerbInput.setAttribute('id', 'forcedVerbInput')
+	ulElement.appendChild(forcedVerbInput)
 	ulElement.appendChild(document.createElement('br'))
 	
 	
@@ -130,13 +120,7 @@ function filterClicker(){
 	
 	checkboxes = $('ul li input[type=checkbox]');
 	
-	document.getElementById("loginSubmit").addEventListener("click", function(){
-		for(i = 0; i < loginInfo.length; i++){
-			if(loginInfo[i].includes(document.getElementById('username').value) && loginInfo[i].includes(document.getElementById('password').value)){
-				alert('TEST')
-			}
-		}
-	})
+	
 	
 	
 	document.getElementById("submitBoxFilter").addEventListener("click", function(){
@@ -166,6 +150,18 @@ function filterClicker(){
 		initialLearnMode = learnModeIsChecked
 		initialTestMode = testModeIsChecked
 		
+		
+		if(document.getElementById('forcedVerbInput').value == ''){
+			drawTable();
+		}
+		forcedVerbArray = document.getElementById('forcedVerbInput').value.replace(/\s/g,'').split(',')		
+		console.log(forcedVerbArray)
+		forcedVerbArray = filterVerbs(forcedVerbArray)
+		
+		console.log(forcedVerbArray)
+		if(totalRows < forcedVerbArray.length){
+			totalRows = forcedVerbArray.length
+		}
 		//conjugationInit();
 		drawTable();
 	});
