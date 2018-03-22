@@ -26,6 +26,10 @@ function conjugationInit(){
 	keyValueAllowedList = [];	
 }
 
+function onlyUnique(value, index, self) { 
+    return self.indexOf(value) === index;
+}
+
 function filterVerbs(arrayToFilter){
 	for(var i = 0; i < arrayToFilter.length; i++){
 		var isInArray = false
@@ -46,8 +50,10 @@ function filterVerbs(arrayToFilter){
 		arrayToFilter = arrayToFilter.slice(0,arrayToFilter.length-1)
 	}
 	
+	arrayToFilter = arrayToFilter.filter(onlyUnique)
 	
 	for(var i = 0; i < arrayToFilter.length; i++){
+		
 		while(arrayToFilter[i] == null){
 			array1 = arrayToFilter.slice(0, i)
 			array2 = arrayToFilter.slice(i+1, arrayToFilter.length)

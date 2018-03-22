@@ -31,10 +31,6 @@ function drawCheckboxes(){
 	var ulElement = document.createElement("ul");
 	ulElement.setAttribute('id', 'tensesFilter');
 	
-	ulElement.appendChild(document.createElement('br'))
-	ulElement.appendChild(document.createElement('br'))
-	
-	
 	var forcedVerbInput = document.createElement('input')
 	forcedVerbInput.setAttribute('id', 'forcedVerbInput')
 	ulElement.appendChild(forcedVerbInput)
