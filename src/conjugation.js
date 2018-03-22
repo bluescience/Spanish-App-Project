@@ -314,6 +314,7 @@ function drawTable() {
 		accentDiv.appendChild(inputAccent);
 	}
 	
+	
 	var submitDiv = document.getElementById('submitDiv');
 	var submitBoxForVerbs = document.createElement('input');
 	submitBoxForVerbs.setAttribute('type', 'submit');
@@ -325,6 +326,10 @@ function drawTable() {
 	}
 	submitBoxForVerbs.setAttribute('id', 'submitBox');
 	submitDiv.appendChild(submitBoxForVerbs);
+
+	if(!learnModeIsChecked && !testModeIsChecked){
+		submitDiv.innerHTML = ''
+	}
 	
 	clicker();
 }
@@ -404,79 +409,80 @@ function clicker (){
 		verbChecker = [];
 		drawTable();
 	});
-	
-	document.getElementById("submitBox").addEventListener("click", function(){
-		var answers = []
-		var questionAmount = 0
-		var correctAnswers = 0
-		for (var r = 0; r < totalRows; r++){
-			if(translationModeIsChecked){
-				idAns = r + "-translation"
-				questionAmount++
-				if((document.getElementById(idAns).value).trim() == verbs[verbChecker[r][0]]['english']){
-					document.getElementById(idAns).style.color = "green"
-					correctAnswers++
-				}
-				else{
-					document.getElementById(idAns).style.color = "black"
-				}
-				if(initialLearnMode){
-					if(learnModeIsChecked){
-						document.getElementById(r + '-translation-div').innerHTML = verbs[verbChecker[r][0]]['english']
+	if(learnModeIsChecked || testModeIsChecked){
+		document.getElementById("submitBox").addEventListener("click", function(){
+			var answers = []
+			var questionAmount = 0
+			var correctAnswers = 0
+			for (var r = 0; r < totalRows; r++){
+				if(translationModeIsChecked){
+					idAns = r + "-translation"
+					questionAmount++
+					if((document.getElementById(idAns).value).trim() == verbs[verbChecker[r][0]]['english']){
+						document.getElementById(idAns).style.color = "green"
+						correctAnswers++
 					}
-					else if (learnModeWasCheckedBefore){
-						document.getElementById(r + '-translation-div').innerHTML = '';
+					else{
+						document.getElementById(idAns).style.color = "black"
 					}
-				}
-			}	
-			for (var c = 0; c < verbs[verbChecker[r][0]][verbChecker[r][1]].length; c++){
-				if(!spanishModeIsChecked && c == 4){
-					c++;
-				}
-				var inputedVerb = String(r) + "-" + String(c) + "-input";
-				if(initialLearnMode){
-					if(learnModeIsChecked){
-						document.getElementById(String(r) + '-' + String(c) + "-div").innerHTML = verbs[verbChecker[r][0]][verbChecker[r][1]][c]
+					if(initialLearnMode){
+						if(learnModeIsChecked){
+							document.getElementById(r + '-translation-div').innerHTML = verbs[verbChecker[r][0]]['english']
+						}
+						else if (learnModeWasCheckedBefore){
+							document.getElementById(r + '-translation-div').innerHTML = '';
+						}
 					}
-					else if (learnModeWasCheckedBefore){
-						document.getElementById(String(r) + '-' + String(c) + "-div").innerHTML = '';
+				}	
+				for (var c = 0; c < verbs[verbChecker[r][0]][verbChecker[r][1]].length; c++){
+					if(!spanishModeIsChecked && c == 4){
+						c++;
 					}
+					var inputedVerb = String(r) + "-" + String(c) + "-input";
+					if(initialLearnMode){
+						if(learnModeIsChecked){
+							document.getElementById(String(r) + '-' + String(c) + "-div").innerHTML = verbs[verbChecker[r][0]][verbChecker[r][1]][c]
+						}
+						else if (learnModeWasCheckedBefore){
+							document.getElementById(String(r) + '-' + String(c) + "-div").innerHTML = '';
+						}
 
-					//answers.push(document.getElementById(idAns).value);
-					if((document.getElementById(inputedVerb).value).trim() == verbs[verbChecker[r][0]][verbChecker[r][1]][c]){
-						document.getElementById(inputedVerb).style.color = "green"
+						//answers.push(document.getElementById(idAns).value);
+						if((document.getElementById(inputedVerb).value).trim() == verbs[verbChecker[r][0]][verbChecker[r][1]][c]){
+							document.getElementById(inputedVerb).style.color = "green"
+						}
+						else{
+							document.getElementById(inputedVerb).style.color = "black"
+						}
 					}
-					else{
-						document.getElementById(inputedVerb).style.color = "black"
+					if(initialTestMode){
+						questionAmount++;
+						if((document.getElementById(inputedVerb).value).trim() == verbs[verbChecker[r][0]][verbChecker[r][1]][c]){
+							document.getElementById(inputedVerb).style.color = "green"
+							correctAnswers++;
+						}
+						else{
+							document.getElementById(inputedVerb).style.color = "red"
+						}
 					}
 				}
-				if(initialTestMode){
-					questionAmount++;
-					if((document.getElementById(inputedVerb).value).trim() == verbs[verbChecker[r][0]][verbChecker[r][1]][c]){
-						document.getElementById(inputedVerb).style.color = "green"
-						correctAnswers++;
-					}
-					else{
-						document.getElementById(inputedVerb).style.color = "red"
-					}
+			}
+			
+			if(initialLearnMode){
+				if(learnModeIsChecked){
+					learnModeIsChecked = false
+					learnModeWasCheckedBefore = true
+				}
+				else if(learnModeWasCheckedBefore){
+					learnModeIsChecked = true
+					learnModeWasCheckedBefore = false
 				}
 			}
-		}
-		
-		if(initialLearnMode){
-			if(learnModeIsChecked){
-				learnModeIsChecked = false
-				learnModeWasCheckedBefore = true
+			if(initialTestMode){
+				document.getElementById('scoreDiv').innerHTML += ("You have scored " + correctAnswers + '/' + questionAmount + ": scoring " + (correctAnswers / questionAmount) * 100 + "% <br>")
 			}
-			else if(learnModeWasCheckedBefore){
-				learnModeIsChecked = true
-				learnModeWasCheckedBefore = false
-			}
-		}
-		if(initialTestMode){
-			document.getElementById('scoreDiv').innerHTML += ("You have scored " + correctAnswers + '/' + questionAmount + ": scoring " + (correctAnswers / questionAmount) * 100 + "% <br>")
-		}
-	});
+		});
+	}
 
 	 
 	jQuery("#Á").on('click', function() {

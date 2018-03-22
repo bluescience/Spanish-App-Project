@@ -56,6 +56,7 @@ function drawCheckboxes(){
 	var learnModeCheck = document.createElement('input')
 	learnModeCheck.setAttribute('type', 'checkBox');
 	learnModeCheck.setAttribute('id', 'learnMode')
+	learnModeCheck.setAttribute('checked', 'true')
 	
 	var liLearnMode = document.createElement('li')
 	ulElement.appendChild(document.createElement('br'))
@@ -147,10 +148,10 @@ function filterClicker(){
 		initialTestMode = testModeIsChecked
 		
 		
-		if(document.getElementById('forcedVerbInput').value == ''){
+		if(document.getElementById('forcedVerbInput').value == null){
 			drawTable();
 		}
-		forcedVerbArray = document.getElementById('forcedVerbInput').value.replace(/\s/g,'').split(',')		
+		forcedVerbArray = document.getElementById('forcedVerbInput').value.replace(/[^a-zA-Z0-9]/g, ',').split(',')		
 		console.log(forcedVerbArray)
 		forcedVerbArray = filterVerbs(forcedVerbArray)
 		
