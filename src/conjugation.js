@@ -43,6 +43,10 @@ function filterVerbs(arrayToFilter){
 		}
 	}
 	
+	if(arrayToFilter.sort()[0] == null && arrayToFilter.sort()[arrayToFilter.length -1] == null){
+		return []
+	}
+	
 	while(arrayToFilter[0] == null){
 		arrayToFilter = arrayToFilter.slice(1,arrayToFilter.length)
 	}
