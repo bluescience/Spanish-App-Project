@@ -1,0 +1,27 @@
+.body-class{
+	font-family: "Verdana", "Geneva", 'sans-serif';
+	font-size: 16;
+}
+
+.light-theme{
+	background-color: cbc8c0;
+	color: 000000;
+}
+
+.dark-theme{
+	background-color: 1c1c1a;
+	color: ffffff;
+}
+
+.table-styling{
+	border-collapse:collapse;
+	border:0px;
+}
+
+.td-styling{
+	border:0px;
+	width:100px;
+	height:50px;
+	text-align:center;
+	padding:0 2px
+}
